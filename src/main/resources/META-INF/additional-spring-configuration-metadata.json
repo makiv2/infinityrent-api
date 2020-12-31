@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "infinityrent.api.jwt.secret",
+      "type": "java.lang.String",
+      "description": "JWT Secret used for signing tokens."
+    },
+    {
+      "name": "infinityrent.api.jwt.expiration.ms",
+      "type": "java.lang.String",
+      "description": "JWT Token expiry time."
+    }
+  ] }
