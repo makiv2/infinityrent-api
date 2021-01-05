@@ -9,6 +9,7 @@ import com.infinityrent.api.API.model.User;
 import com.infinityrent.api.API.repository.UserRepository;
 import com.infinityrent.api.API.security.model.UserDetailsImpl;
 import com.infinityrent.api.API.util.JwtUtil;
+import io.jsonwebtoken.Claims;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -77,6 +78,14 @@ public class UserService {
         final List<String> roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
-        return new JwtResponse(jwtToken, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles);
+        final Claims jwtClaims = jwtUtil.getJwtClaims(jwtToken);
+        return new JwtResponse(
+                jwtToken,
+                jwtClaims.getIssuedAt(),
+                jwtClaims.getExpiration(),
+                userDetails.getId(),
+                userDetails.getUsername(),
+                userDetails.getEmail(),
+                roles);
     }
 }
