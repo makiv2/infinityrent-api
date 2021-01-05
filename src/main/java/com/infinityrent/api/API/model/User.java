@@ -1,6 +1,5 @@
 package com.infinityrent.api.API.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

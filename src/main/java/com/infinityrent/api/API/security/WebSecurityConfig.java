@@ -3,7 +3,6 @@ package com.infinityrent.api.API.security;
 import com.infinityrent.api.API.security.jwt.AuthEntryPointJwt;
 import com.infinityrent.api.API.security.jwt.AuthTokenFilter;
 import com.infinityrent.api.API.security.service.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -55,6 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    //TODO: configure these settings properly
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
