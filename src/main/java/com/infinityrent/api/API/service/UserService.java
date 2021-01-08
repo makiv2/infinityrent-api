@@ -88,4 +88,10 @@ public class UserService {
                 userDetails.getEmail(),
                 roles);
     }
+
+    public boolean exists(String username, String email) {
+        return existsByEmail(email) || existsByUsername(username);
+    }
+
+
 }

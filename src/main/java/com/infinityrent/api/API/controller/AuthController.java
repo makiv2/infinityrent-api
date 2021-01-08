@@ -22,7 +22,10 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+        if (!userService.exists(loginRequest.getUsername(), "mailish"))
+            return ResponseEntity.badRequest()
+                    .body(new MessageResponse("Error: Username or email does not exist!"));
         final JwtResponse response = userService.authenticate(loginRequest);
         return ResponseEntity.ok(response);
     }
