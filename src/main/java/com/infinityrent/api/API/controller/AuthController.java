@@ -23,7 +23,7 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-        if (!userService.exists(loginRequest.getUsername(), "mailish"))
+        if (!userService.exists(loginRequest.getUsername(), "mailish")) //TODO: add email validation to login request
             return ResponseEntity.badRequest()
                     .body(new MessageResponse("Error: Username or email does not exist!"));
         final JwtResponse response = userService.authenticate(loginRequest);
