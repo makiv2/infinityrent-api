@@ -37,12 +37,27 @@ public class User {
     @Email
     private String email;
 
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "profile_id", referencedColumnName = "id")
+    private Profile profile;
+
+    @OneToMany(mappedBy = "user_recipient",
+            orphanRemoval = true,
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Set<Review> reviewsReceived;
+
+    @OneToMany(mappedBy = "user_sender",
+            orphanRemoval = true,
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Set<Review> reviewsGiven;
 
     public User(String username, String password, String email) {
         this.username = username;
